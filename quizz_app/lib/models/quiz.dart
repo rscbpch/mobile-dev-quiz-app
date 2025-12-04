@@ -11,20 +11,11 @@ class Quiz {
 
   factory Quiz.fromJson(Map<String, dynamic> json) {
     List<Question> q = (json['questions'] as List).map((data) => Question.fromJson(data)).toList();
-    print('Loaded questions:');
-    for (var question in q) {
-      print('  Question id: \'${question.id}\', title: \'${question.title}\'');
-    }
-
-    List<Answer> a = (json['answers'] as List).map((data) {
-      print('Parsing answer for questionId: \'${data['questionId']}\'');
-      return Answer.fromJson(data, q);
-    }).toList();
 
     return Quiz(
       id: json['id'], 
       name: json['name']
-    ) ..questions = q ..answers = a;
+    ) ..questions = q;
   }
 
   int getScore() {

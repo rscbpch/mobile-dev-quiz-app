@@ -10,6 +10,13 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int score = 0;
+    for (int i = 0; i < questions.length; i++) {
+      if (userAnswers.length > i && userAnswers[i] == questions[i].correctAnswer) {
+        score += questions[i].points;
+      }
+    }
+    int total = questions.fold(0, (sum, q) => sum + q.points);
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Column(
@@ -18,7 +25,20 @@ class ResultScreen extends StatelessWidget {
         children: [
           const Text(
             'Quiz Result',
-            style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 26, 
+              fontWeight: FontWeight.bold
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 12),
+          Text(
+            'Score: $score / $total',
+            style: const TextStyle(
+              fontSize: 18, 
+              fontWeight: FontWeight.w600, 
+              color: Color.fromRGBO(74, 112, 169, 100)
+            ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
@@ -29,33 +49,38 @@ class ResultScreen extends StatelessWidget {
                 final q = questions[idx];
                 final userAnswer = userAnswers.length > idx ? userAnswers[idx] : null;
                 final isCorrect = userAnswer == q.correctAnswer;
+
                 return Card(
                   margin: const EdgeInsets.symmetric(vertical: 8),
                   child: ListTile(
-                    title: Text(q.title),
+                    title: Text(
+                      q.title, 
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold, 
+                        fontSize: 18
+                      )
+                    ),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ...q.choices.map((choice) {
+                          Widget? iconWidget;
+                          TextStyle textStyle = const TextStyle(fontSize: 16);
                           if (choice == q.correctAnswer) {
-                            return Row(
-                              children: [
-                                const Icon(Icons.check, color: Colors.green, size: 20),
-                                const SizedBox(width: 6),
-                                Text(choice, style: const TextStyle(color: Colors.green)),
-                              ],
-                            );
+                            iconWidget = const Icon(Icons.check, color: Colors.green, size: 20);
+                            textStyle = const TextStyle(color: Colors.green, fontSize: 16);
                           } else if (choice == userAnswer && !isCorrect) {
-                            return Row(
-                              children: [
-                                const Icon(Icons.close, color: Colors.red, size: 20),
-                                const SizedBox(width: 6),
-                                Text(choice, style: const TextStyle(color: Colors.red)),
-                              ],
-                            );
-                          } else {
-                            return Text(choice);
+                            iconWidget = const Icon(Icons.close, color: Colors.red, size: 20);
+                            textStyle = const TextStyle(color: Colors.red, fontSize: 16);
                           }
+                          return Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(width: 28, child: iconWidget),
+                              const SizedBox(width: 6),
+                              Expanded(child: Text(choice, style: textStyle)),
+                            ],
+                          );
                         }),
                       ],
                     ),

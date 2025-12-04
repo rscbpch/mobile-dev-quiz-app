@@ -5,6 +5,7 @@ import 'package:quizz_app/ui/screens/result_screen.dart';
 import 'package:quizz_app/models/quiz.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
+import 'package:google_fonts/google_fonts.dart';
 
 enum QuizStage { welcome, question, result }
 
@@ -67,7 +68,15 @@ class _QuizAppState extends State<QuizApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(body: loading ? const Center(child: CircularProgressIndicator()) : _buildStage()),
+      theme: ThemeData(
+        textTheme: GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme)
+      ),
+      home: Scaffold(
+        backgroundColor: Color.fromRGBO(156, 198, 219, 100),
+        body: loading ? const Center(
+          child: CircularProgressIndicator()
+        ) : _buildStage()
+      ),
     );
   }
 

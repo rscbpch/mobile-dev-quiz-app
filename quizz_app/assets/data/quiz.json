@@ -7,26 +7,21 @@
       "title": "What is the capital city of Japan?",
       "choices": ["Tokyo", "Kyoto", "Osaka"],
       "correctAnswer": "Tokyo",
-      "points": 1
+      "points": 30
     },
     {
       "id": "q2",
       "title": "Which planet is known as the Red Planet?",
       "choices": ["Earth", "Mars", "Jupiter"],
       "correctAnswer": "Mars",
-      "points": 1
-    }
-  ],
-  "answers": [
-    {
-      "id": "a1",
-      "answerChoice": "Tokyo",
-      "questionId": "q1"
+      "points": 30
     },
     {
-      "id": "a2",
-      "answerChoice": "Jupiter",
-      "questionId": "q2"
+      "id": "q3",
+      "title": "Which one is NOT a Taylor Swift song?",
+      "choices": ["W$sh Li$t", "Foolish One", "Anaheim"],
+      "correctAnswer": "Anaheim",
+      "points": 40
     }
   ]
 }

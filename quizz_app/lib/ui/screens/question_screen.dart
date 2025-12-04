@@ -17,14 +17,17 @@ class QuestionScreen extends StatelessWidget {
         children: [
           Text(
             question.title,
-            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+              fontSize: 22, 
+              fontWeight: FontWeight.bold
+            ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 32),
+          const SizedBox(height: 50),
           ...question.choices.map(
             (choice) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: AppButton(choice, onTap: () => onAnswer(choice), icon: Icons.question_answer),
+              child: AppButton(choice, onTap: () => onAnswer(choice)),
             ),
           ),
         ],
